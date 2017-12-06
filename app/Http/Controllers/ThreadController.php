@@ -48,7 +48,9 @@ class ThreadController extends Controller
      */
     public function show(Thread $thread)
     {
-        return view('threads.show', compact('thread'));
+        return view('threads.show')->with([
+            'thread' => $thread->load('replies.user')
+        ]);
     }
 
     /**

@@ -23,4 +23,9 @@ class Thread extends Model
         return $this->hasMany(Reply::class);
     }
 
+    public function getFormattedCreatedAttribute()
+    {
+        return $this->created_at->diffForHUmans();
+    }
+
 }

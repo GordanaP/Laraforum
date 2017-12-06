@@ -17,4 +17,9 @@ class Reply extends Model
     {
         return $this->belongsTo(Thread::class);
     }
+
+    public function getFormattedCreatedAttribute()
+    {
+        return $this->created_at->diffForHUmans();
+    }
 }
