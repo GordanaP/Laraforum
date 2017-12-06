@@ -100,9 +100,8 @@ return [
     */
 
     'custom' => [
-        'reply_body' => [
-            'required' => 'The reply is required.',
-            'max' => 'The reply may not be greater than :max characters.',
+        'attribute-name' => [
+            'rule-name' => 'custom-message',
         ],
     ],
 

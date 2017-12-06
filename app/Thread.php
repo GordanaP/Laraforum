@@ -2,11 +2,19 @@
 
 namespace App;
 
+use App\Observers\ThreadObserver;
 use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
 {
-    protected $fillable = ['title', 'slug', 'body'];
+    protected $fillable = ['title', 'body'];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::observe(ThreadObserver::class);
+    }
 
     public function getRouteKeyName()
     {
@@ -26,6 +34,16 @@ class Thread extends Model
     public function getFormattedCreatedAttribute()
     {
         return $this->created_at->diffForHUmans();
+    }
+
+    public static function new($request)
+    {
+        $thread = new static;
+
+        $thread->title = $request->title;
+        $thread->body = $request->thread_body;
+
+        return $thread;
     }
 
     public function addReply($reply)

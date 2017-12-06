@@ -24,7 +24,7 @@ class Reply extends Model
         return $this->created_at->diffForHUmans();
     }
 
-    public static function createNew($request)
+    public static function new($request)
     {
         $reply = new static;
 

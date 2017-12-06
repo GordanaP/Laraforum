@@ -24,7 +24,9 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
-
+                @auth
+                    <li><a href="{{ route('threads.create') }}">New Thread</a></li>
+                @endauth
                 <li><a href="{{ route('threads.index') }}">Forum</a></li>
 
                 <!-- Authentication Links -->

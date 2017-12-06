@@ -24,7 +24,7 @@ class ReplyRequest extends FormRequest
     public function rules()
     {
         return [
-            'reply_body' => 'required|max:10'
+            'reply_body' => 'required|max:1000'
         ];
     }
 }

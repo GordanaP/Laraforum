@@ -42,7 +42,7 @@ class ReplyController extends Controller
      */
     public function store(ReplyRequest $request, Thread $thread)
     {
-        $thread->addReply(Reply::createNew($request));
+        $thread->addReply(Reply::new($request));
 
         return back();
     }

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Thread;
-use Illuminate\Http\Request;
+use App\Http\Requests\ThreadRequest;
 
 class ThreadController extends Controller
 {
@@ -26,7 +27,7 @@ class ThreadController extends Controller
      */
     public function create()
     {
-        //
+        return view('threads.create');
     }
 
     /**
@@ -35,9 +36,12 @@ class ThreadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ThreadRequest $request)
     {
-        //
+
+        Auth::user()->addThread(Thread::new($request));
+
+        return redirect()->route('threads.index');
     }
 
     /**
@@ -71,7 +75,7 @@ class ThreadController extends Controller
      * @param  \App\Thread  $thread
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Thread $thread)
+    public function update(ThreadRequest $request, Thread $thread)
     {
         //
     }
