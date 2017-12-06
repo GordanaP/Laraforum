@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model
@@ -21,5 +22,15 @@ class Reply extends Model
     public function getFormattedCreatedAttribute()
     {
         return $this->created_at->diffForHUmans();
+    }
+
+    public static function createNew($request)
+    {
+        $reply = new static;
+
+        $reply->body = $request->reply_body;
+        $reply->user()->associate(Auth::id());
+
+        return $reply;
     }
 }

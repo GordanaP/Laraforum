@@ -2,17 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Reply;
-use Illuminate\Http\Request;
+use App\Thread;
+use App\Http\Requests\ReplyRequest;
 
 class ReplyController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Thread $thread)
     {
         //
     }
@@ -22,7 +29,7 @@ class ReplyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Thread $thread)
     {
         //
     }
@@ -33,9 +40,11 @@ class ReplyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReplyRequest $request, Thread $thread)
     {
-        //
+        $thread->addReply(Reply::createNew($request));
+
+        return back();
     }
 
     /**
@@ -44,7 +53,7 @@ class ReplyController extends Controller
      * @param  \App\Reply  $reply
      * @return \Illuminate\Http\Response
      */
-    public function show(Reply $reply)
+    public function show(Thread $thread, Reply $reply)
     {
         //
     }
@@ -55,7 +64,7 @@ class ReplyController extends Controller
      * @param  \App\Reply  $reply
      * @return \Illuminate\Http\Response
      */
-    public function edit(Reply $reply)
+    public function edit(Thread $thread, Reply $reply)
     {
         //
     }
@@ -67,7 +76,7 @@ class ReplyController extends Controller
      * @param  \App\Reply  $reply
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Reply $reply)
+    public function update(ReplyRequest $request, Thread $thread, Reply $reply)
     {
         //
     }
@@ -78,7 +87,7 @@ class ReplyController extends Controller
      * @param  \App\Reply  $reply
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Reply $reply)
+    public function destroy(Thread $thread, Reply $reply)
     {
         //
     }

@@ -28,4 +28,9 @@ class Thread extends Model
         return $this->created_at->diffForHUmans();
     }
 
+    public function addReply($reply)
+    {
+        $this->replies()->save($reply);
+    }
+
 }
