@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
 
         factory(App\User::class)->create([
             'name' => $user['name'],
-            'name' => $user['name'],
+            'email' => $user['email'],
         ]);
 
         factory(App\User::class, 5)->create();
