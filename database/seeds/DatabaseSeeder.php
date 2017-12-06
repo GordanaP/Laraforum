@@ -4,6 +4,8 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
+    protected $tables = [ 'users' ];
+
     /**
      * Run the database seeds.
      *
@@ -11,6 +13,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $this->cleanDatabase();
+
+        $this->call(UsersTableSeeder::class);
+    }
+
+    public function cleanDatabase()
+    {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+        foreach ($this->tables as $table)
+        {
+            DB::table($table)->truncate();
+        }
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 }
