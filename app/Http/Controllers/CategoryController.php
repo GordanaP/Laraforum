@@ -2,17 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-use App\Thread;
-use App\Http\Requests\ThreadRequest;
+use App\Category;
+use Illuminate\Http\Request;
 
-class ThreadController extends Controller
+class CategoryController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth')->except(['index', 'show']);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -20,9 +14,7 @@ class ThreadController extends Controller
      */
     public function index()
     {
-        $threads = Thread::with('user')->latest()->get();
-
-        return view('threads.index', compact('threads'));
+        //
     }
 
     /**
@@ -32,7 +24,7 @@ class ThreadController extends Controller
      */
     public function create()
     {
-        return view('threads.create');
+        //
     }
 
     /**
@@ -41,34 +33,29 @@ class ThreadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ThreadRequest $request)
+    public function store(Request $request)
     {
-
-        Auth::user()->addThread(Thread::new($request));
-
-        return redirect()->route('threads.index');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Thread  $thread
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Thread $thread)
+    public function show(Category $category)
     {
-        return view('threads.show')->with([
-            'thread' => $thread->load('replies.user')
-        ]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Thread  $thread
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Thread $thread)
+    public function edit(Category $category)
     {
         //
     }
@@ -77,10 +64,10 @@ class ThreadController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Thread  $thread
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(ThreadRequest $request, Thread $thread)
+    public function update(Request $request, Category $category)
     {
         //
     }
@@ -88,10 +75,10 @@ class ThreadController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Thread  $thread
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Thread $thread)
+    public function destroy(Category $category)
     {
         //
     }

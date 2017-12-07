@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    protected $tables = [ 'users', 'threads', 'replies' ];
+    protected $tables = [ 'users', 'categories', 'threads', 'replies' ];
 
     /**
      * Run the database seeds.
@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->cleanDatabase();
 
         $this->call(UsersTableSeeder::class);
+        $this->call(CategoriesTableSeeder::class);
         $this->call(ThreadsTableSeeder::class);
         $this->call(RepliesTableSeeder::class);
     }

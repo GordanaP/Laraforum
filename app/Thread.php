@@ -31,6 +31,11 @@ class Thread extends Model
         return $this->hasMany(Reply::class);
     }
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
     public function getFormattedCreatedAttribute()
     {
         return $this->created_at->diffForHUmans();
@@ -50,5 +55,6 @@ class Thread extends Model
     {
         $this->replies()->save($reply);
     }
+
 
 }

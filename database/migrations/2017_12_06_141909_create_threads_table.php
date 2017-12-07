@@ -19,6 +19,9 @@ class CreateThreadsTable extends Migration
             $table->unsignedInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
+            $table->unsignedInteger('category_id')->index();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+
             $table->string('title');
             $table->string('slug');
             $table->text('body');
