@@ -12,7 +12,9 @@
         @include('partials.top._nav')
 
         <div class="container">
+
             @yield('content')
+
         </div>
 
     </div>

@@ -16,6 +16,11 @@ class Category extends Model
         static::observe(CategoryObserver::class);
     }
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function threads()
     {
         return $this->hasMany(Thread::class);

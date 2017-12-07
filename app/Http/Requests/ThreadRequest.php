@@ -26,16 +26,18 @@ class ThreadRequest extends FormRequest
         switch ($this->method()) {
             case 'POST':
                 return [
+                    'category' => 'required|exists:categories,id',
                     'title' => 'required|max:255|unique:threads,title',
-                    'thread_body' => 'required|max:1000'
+                    'body' => 'required|max:1000'
                 ];
                 break;
 
             case 'PUT':
             case 'PATCH':
                 return [
+                    'category' => 'required|exists:categories,id',
                     'title' => 'required|max:255|unique:threads,title,'.$this->thread->id,
-                    'thread_body' => 'required|max:1000'
+                    'body' => 'required|max:1000'
                 ];
                 break;
         }

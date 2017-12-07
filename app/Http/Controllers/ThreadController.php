@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-use App\Thread;
+use App\Category;
 use App\Http\Requests\ThreadRequest;
+use App\Thread;
+use Auth;
 
 class ThreadController extends Controller
 {
@@ -18,9 +19,10 @@ class ThreadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Category $category = null)
     {
-        $threads = Thread::with('user')->latest()->get();
+        $threads = $category ? $category->threads->load('user', 'category')
+                             : Thread::with('user', 'category')->latest()->get();
 
         return view('threads.index', compact('threads'));
     }
@@ -43,7 +45,6 @@ class ThreadController extends Controller
      */
     public function store(ThreadRequest $request)
     {
-
         Auth::user()->addThread(Thread::new($request));
 
         return redirect()->route('threads.index');
@@ -55,7 +56,7 @@ class ThreadController extends Controller
      * @param  \App\Thread  $thread
      * @return \Illuminate\Http\Response
      */
-    public function show(Thread $thread)
+    public function show(Category $category, Thread $thread)
     {
         return view('threads.show')->with([
             'thread' => $thread->load('replies.user')

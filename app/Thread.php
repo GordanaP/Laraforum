@@ -46,7 +46,8 @@ class Thread extends Model
         $thread = new static;
 
         $thread->title = $request->title;
-        $thread->body = $request->thread_body;
+        $thread->body = $request->body;
+        $thread->category()->associate($request->category);
 
         return $thread;
     }
@@ -55,6 +56,5 @@ class Thread extends Model
     {
         $this->replies()->save($reply);
     }
-
 
 }
