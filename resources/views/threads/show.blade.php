@@ -5,7 +5,12 @@
 @section('content')
 
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-3">
+            @include('partials.sidebar._filters')
+            @include('partials.sidebar._categories')
+        </div>
+
+        <div class="col-md-9">
 
             <!-- Errors list -->
             <div class="errors-list">
@@ -17,8 +22,12 @@
                 <!-- Thread title -->
                 <h3>{{ $thread->title }}
                     <p class="small">
-                        Started by <a href="#">{{ $thread->user->name }} </a>
+                        Started by <a href="{{ route('threads.index', ['', set_filter('user', $thread->user->name)]) }}">
+                            {{ $thread->user->name }}
+                        </a>
                         {{ $thread->formatted_created }}
+
+                        <i class="fa fa-comments" aria-hidden="true"></i> {{ $thread->reply_count }} {{ str_plural('reply', $thread->reply_count) }}
                     </p>
                 </h3>
 
@@ -38,34 +47,26 @@
                     @endguest
                 </p>
 
+                <!-- Thread -->
+                <article class="thread">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a href="{{ route('threads.index', ['', set_filter('user', $thread->user->name)]) }}">
+                                {{ $thread->user->name }}
+                            </a>
+                        </div>
+                        <div class="panel-body">
+                            {{ $thread->body }}
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Replies -->
+                @each ('threads.partials._reply', $replies, 'reply')
+
+                {{ $replies->links() }}
+
             </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-
-            <!-- Thread -->
-            <article class="thread">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <a href="#">{{ $thread->user->name }}</a>
-                    </div>
-                    <div class="panel-body">
-                        {{ $thread->body }}
-                    </div>
-                </div>
-            </article>
-
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-
-            <!-- Replies -->
-            @each ('threads.partials._reply', $thread->replies, 'reply')
-
         </div>
     </div>
 

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-use App\Thread;
 use App\Category;
-use App\Http\Requests\ThreadRequest;
 use App\Filters\Thread\ThreadFilters;
+use App\Http\Requests\ThreadRequest;
+use App\Reply;
+use App\Thread;
+use Auth;
 
 class ThreadController extends Controller
 {
@@ -22,8 +23,15 @@ class ThreadController extends Controller
      */
     public function index(Category $category = null, ThreadFilters $filters)
     {
-        $threads = $category ? $category->threads->load('user', 'category')
-                             : Thread::with('user', 'category')->latest()->filter($filters)->get();
+        $threads = Thread::with('user', 'category', 'replies')->latest()->filter($filters);
+
+        if($category)
+        {
+            $threads = Thread::with('user', 'category', 'replies')->where('category_id', $category->id);
+        }
+
+
+        $threads = $threads->paginate(5);
 
         return view('threads.index', compact('threads'));
     }
@@ -59,9 +67,9 @@ class ThreadController extends Controller
      */
     public function show(Category $category, Thread $thread)
     {
-        return view('threads.show')->with([
-            'thread' => $thread->load('replies.user')
-        ]);
+        $replies = Reply::with('user')->where('thread_id', $thread->id)->paginate(2);
+
+        return view('threads.show', compact('thread', 'replies'));
     }
 
     /**

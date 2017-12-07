@@ -24,6 +24,10 @@
                 </div>
             </div>
 
+            <div class="text-center">
+                {{ $threads->appends(Request::input())->links() }}
+            </div>
+
         </div>
 
     </div>

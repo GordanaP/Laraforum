@@ -4,7 +4,9 @@
 
         <div class="panel-heading">
 
-            <a href="#">{{ $reply->user->name }}</a>
+            <a href="{{ route('threads.index', ['', set_filter('user', $reply->user->name)]) }}">
+                {{ $reply->user->name }}
+            </a>
 
             posted {{ $reply->formatted_created }}</div>
 
