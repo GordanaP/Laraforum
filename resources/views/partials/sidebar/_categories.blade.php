@@ -7,14 +7,14 @@
 
             <li class="list-group-item">
                 <a href="{{ route('threads.index') }}">
-                    <span class="glyphicon glyphicon-record"></span> All
+                    <i class="fa fa-circle" aria-hidden="true"></i> All
                 </a>
             </li>
 
             @foreach ($categories as $category)
                 <li class="list-group-item">
                     <a href="{{ route('threads.index', $category) }}">
-                        <span class="glyphicon glyphicon-record"></span> {{$category->formatted_name}}
+                        <i class="fa fa-circle" aria-hidden="true"></i> {{$category->formatted_name}}
                     </a>
                 </li>
             @endforeach

@@ -6,6 +6,7 @@
     <div class="row">
 
         <div class="col-md-3">
+            @include('partials.sidebar._filters')
             @include('partials.sidebar._categories')
         </div>
 

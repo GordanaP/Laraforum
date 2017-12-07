@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use App\Thread;
 use App\Category;
 use App\Http\Requests\ThreadRequest;
-use App\Thread;
-use Auth;
+use App\Filters\Thread\ThreadFilters;
 
 class ThreadController extends Controller
 {
@@ -19,10 +20,10 @@ class ThreadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Category $category = null)
+    public function index(Category $category = null, ThreadFilters $filters)
     {
         $threads = $category ? $category->threads->load('user', 'category')
-                             : Thread::with('user', 'category')->latest()->get();
+                             : Thread::with('user', 'category')->latest()->filter($filters)->get();
 
         return view('threads.index', compact('threads'));
     }

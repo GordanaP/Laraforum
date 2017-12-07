@@ -36,6 +36,11 @@ class Thread extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function scopeFilter($query, $filters)
+    {
+        return $filters->apply($query);
+    }
+
     public function getFormattedCreatedAttribute()
     {
         return $this->created_at->diffForHUmans();

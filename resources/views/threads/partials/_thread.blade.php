@@ -13,7 +13,11 @@
             </a>
         </span>
 
-        Started by {{ $thread->user->name }}, {{ $thread->formatted_created }}
+        Started by
+        <a href="{{ route('threads.index', ['', set_filter('user', $thread->user->name)]) }}">
+            {{ $thread->user->name }}
+        </a>,
+        {{ $thread->formatted_created }}
     </p>
 
 </article>

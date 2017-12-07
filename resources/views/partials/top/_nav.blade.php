@@ -19,15 +19,14 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                &nbsp;
+                <li><a href="{{ route('threads.index') }}">All Threads</a></li>
+                @auth
+                    <li><a href="{{ route('threads.create') }}">New Thread</a></li>
+                @endauth
             </ul>
 
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
-                @auth
-                    <li><a href="{{ route('threads.create') }}">New Thread</a></li>
-                @endauth
-                <li><a href="{{ route('threads.index') }}">Forum</a></li>
 
                 <!-- Authentication Links -->
                 @guest
