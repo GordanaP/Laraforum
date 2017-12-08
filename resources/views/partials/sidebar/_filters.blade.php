@@ -7,7 +7,7 @@
 
             <li class="list-group-item">
                 <a href="{{ route('threads.index') }}">
-                    <i class="fa fa-folder-open-o" aria-hidden="true"></i> All threads
+                    <i class="fa fa-database" aria-hidden="true"></i> All threads
                 </a>
             </li>
 
@@ -18,6 +18,18 @@
                 </a>
             </li>
             @endauth
+
+            <li class="list-group-item">
+                <a href="{{ route('threads.index', ['', set_filter('popular', 1)]) }}">
+                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Popular threads
+                </a>
+            </li>
+
+            <li class="list-group-item">
+                <a href="{{ route('threads.index', ['', set_filter('trending', 1)]) }}">
+                    <i class="fa fa-fire" aria-hidden="true"></i> Hot threads
+                </a>
+            </li>
 
         </div>
 

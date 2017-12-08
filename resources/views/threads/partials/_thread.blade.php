@@ -18,7 +18,7 @@
             {{ $thread->user->name }}
         </a>,
         {{ $thread->formatted_created }}
-        <i class="fa fa-comments" aria-hidden="true"></i> {{ $thread->reply_count }} {{ str_plural('reply', $thread->reply_count) }}
+        <i class="fa fa-comments" aria-hidden="true"></i> {{ $thread->replies_count }} {{ str_plural('reply', $thread->replies_count) }}
     </p>
 
 </article>

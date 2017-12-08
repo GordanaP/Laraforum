@@ -9,11 +9,16 @@ class Thread extends Model
 {
     protected $fillable = ['title', 'body'];
 
+    public $appends = ['replyCount'];
+
     protected static function boot()
     {
         parent::boot();
 
         static::observe(ThreadObserver::class);
+        static::addGlobalScope('replyCount', function($builder){
+            $builder->withCount('replies');
+        });
     }
 
     public function getRouteKeyName()
@@ -62,8 +67,4 @@ class Thread extends Model
         $this->replies()->save($reply);
     }
 
-    public function getReplyCountAttribute()
-    {
-        return $this->replies->count();
-    }
 }
