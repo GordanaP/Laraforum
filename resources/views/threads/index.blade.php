@@ -6,13 +6,14 @@
     <div class="row">
 
         <div class="col-md-3">
+            @include('partials.sidebar._button')
             @include('partials.sidebar._filters')
             @include('partials.sidebar._categories')
         </div>
 
         <div class="col-md-9">
 
-            <div class="panel panel-default">
+            <div class="panel panel-default" style="margin-top: 20px">
                 <div class="panel-heading text-uppercase">
                     Forum Threads
                 </div>

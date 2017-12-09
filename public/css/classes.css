@@ -2,6 +2,7 @@
 .flex-1{flex: 1}
 .flex-2{flex: 2}
 .flex-3{flex: 3}
+.flex-4{flex: 4}
 .flex-column{flex-direction: column;}
 .justify-between{justify-content: space-between;}
 .justify-around{justify-content: space-around;}

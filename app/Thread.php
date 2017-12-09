@@ -2,20 +2,24 @@
 
 namespace App;
 
+use App\Traits\Likeable;
 use App\Observers\ThreadObserver;
 use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
 {
+    use Likeable;
+
     protected $fillable = ['title', 'body'];
 
-    public $appends = ['replyCount'];
+    protected $with = ['user'];
 
     protected static function boot()
     {
         parent::boot();
 
         static::observe(ThreadObserver::class);
+
         static::addGlobalScope('replyCount', function($builder){
             $builder->withCount('replies');
         });
@@ -40,6 +44,7 @@ class Thread extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
 
     public function scopeFilter($query, $filters)
     {

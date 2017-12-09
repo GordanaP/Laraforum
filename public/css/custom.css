@@ -6,3 +6,8 @@
 .thread-title h3 p.small {margin-top: 10px;}
 .categories .list-group-item {border:none;}
 .categories .list-group-item {border-top: 1px solid #eee}
+.btn-link-likes {padding: 0 !important}
+.btn-non-liked:hover{color: red !important}
+.btn-liked{color: red !important}
+a.btn-new-thread {width: 100%; background: none; border: 2px solid #2fa4e7; border-radius: 0; margin: 20px 0;
+    text-transform: uppercase; letter-spacing: 1px}

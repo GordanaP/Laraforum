@@ -23,13 +23,12 @@ class ThreadController extends Controller
      */
     public function index(Category $category = null, ThreadFilters $filters)
     {
-        $threads = Thread::with('user', 'category', 'replies')->latest()->filter($filters);
+        $threads = Thread::with('category')->latest()->filter($filters);
 
         if($category)
         {
-            $threads = Thread::with('user', 'category', 'replies')->where('category_id', $category->id);
+            $threads = Thread::with('category')->where('category_id', $category->id);
         }
-
 
         $threads = $threads->paginate(5);
 
@@ -67,7 +66,8 @@ class ThreadController extends Controller
      */
     public function show(Category $category, Thread $thread)
     {
-        $replies = Reply::with('user')->where('thread_id', $thread->id)->paginate(2);
+        // load user with every reply to avoid N+1 or Reply::where('thread_id', $thread->id)
+        $replies = $thread->replies()->paginate(10);
 
         return view('threads.show', compact('thread', 'replies'));
     }

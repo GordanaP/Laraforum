@@ -22,6 +22,8 @@ Route::group(['prefix' => 'threads/{thread}'], function() {
     Route::resource('/replies', 'ReplyController');
 });
 
+// Favorite
+Route::post('reply/{reply}/likes', 'LikeController@store')->name('likes.store');
 
 // Redirects all non-existing routes to index route
 Route::any('{query}',

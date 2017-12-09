@@ -3,11 +3,16 @@
 namespace App;
 
 use Auth;
+use App\Traits\Likeable;
 use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model
 {
+    use Likeable;
+
     protected $fillable = ['body'];
+
+    protected $with = ['user', 'likes'];
 
     public function user()
     {
@@ -33,4 +38,5 @@ class Reply extends Model
 
         return $reply;
     }
+
 }

@@ -6,6 +6,7 @@
 
     <div class="row">
         <div class="col-md-3">
+            @include('partials.sidebar._button')
             @include('partials.sidebar._filters')
             @include('partials.sidebar._categories')
         </div>
@@ -20,15 +21,29 @@
             <div class="thread-title">
 
                 <!-- Thread title -->
-                <h3>{{ $thread->title }}
-                    <p class="small">
-                        Started by <a href="{{ route('threads.index', ['', set_filter('user', $thread->user->name)]) }}">
-                            {{ $thread->user->name }}
-                        </a>
-                        {{ $thread->formatted_created }}
+                <h3>
 
-                        <i class="fa fa-comments" aria-hidden="true"></i> {{ $thread->replies_count }} {{ str_plural('reply', $thread->replies_count) }}
-                    </p>
+                    {{ $thread->title }}
+
+                    <div class="flex align-center">
+                        <p class="small">
+                            Started by <a href="{{ route('threads.index', ['', set_filter('user', $thread->user->name)]) }}">
+                                {{ $thread->user->name }}
+                            </a>
+                            {{ $thread->formatted_created }}
+
+                            <i class="fa fa-comments" aria-hidden="true"></i> {{ $thread->replies_count }} {{ str_plural('reply', $thread->replies_count) }}
+                        </p>
+
+                        <!-- Like -->
+                        <div>
+                            @include('likes.partials._form', [
+                                'model' => $thread,
+                                'icon' => 'glyphicon-heart'
+                            ])
+                        </div>
+                    </div>
+
                 </h3>
 
                 <!-- Reply form -->
@@ -64,7 +79,9 @@
                 <!-- Replies -->
                 @each ('threads.partials._reply', $replies, 'reply')
 
-                {{ $replies->links() }}
+                <div class="text-center">
+                    {{ $replies->links() }}
+                </div>
 
             </div>
         </div>
