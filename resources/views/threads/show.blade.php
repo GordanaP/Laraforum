@@ -4,85 +4,49 @@
 
 @section('content')
 
+    <!-- Errors list -->
+    <div class="errors-list">
+        @include('errors._list')
+    </div>
+
     <div class="row">
         <div class="col-md-3">
-            @include('partials.sidebar._button')
+            @auth
+                @include('partials.sidebar._button')
+            @endauth
             @include('partials.sidebar._filters')
             @include('partials.sidebar._categories')
         </div>
 
         <div class="col-md-9">
+            <div class="panel panel-default panel-thread-replies">
+                <div class="panel-body">
 
-            <!-- Errors list -->
-            <div class="errors-list">
-                @include('errors._list')
-            </div>
-
-            <div class="thread-title">
-
-                <!-- Thread title -->
-                <h3>
-
-                    {{ $thread->title }}
-
-                    <div class="flex align-center">
-                        <p class="small">
-                            Started by <a href="{{ route('threads.index', ['', set_filter('user', $thread->user->name)]) }}">
-                                {{ $thread->user->name }}
-                            </a>
-                            {{ $thread->formatted_created }}
-
-                            <i class="fa fa-comments" aria-hidden="true"></i> {{ $thread->replies_count }} {{ str_plural('reply', $thread->replies_count) }}
-                        </p>
-
-                        <!-- Like -->
-                        <div>
-                            @include('likes.partials._form', [
-                                'model' => $thread,
-                                'icon' => 'glyphicon-heart'
-                            ])
-                        </div>
-                    </div>
-
-                </h3>
-
-                <!-- Reply form -->
-                <p>
+                    <!-- Reply form -->
                     @auth
-                        <a data-toggle="collapse" href="#replyForm" aria-expanded="false" aria-controls="replyForm">Leave a reply</a>
-
-                        <div class="collapse" id="replyForm">
-                            <div class="well">
-                                @include('replies.partials._form')
-                            </div>
-                        </div>
+                        @include('replies.partials._form')
                     @endauth
                     @guest
+
                         <a href="/login">Log in to reply</a>
+
                     @endguest
-                </p>
 
-                <!-- Thread -->
-                <article class="thread">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <a href="{{ route('threads.index', ['', set_filter('user', $thread->user->name)]) }}">
-                                {{ $thread->user->name }}
-                            </a>
-                        </div>
-                        <div class="panel-body">
-                            {{ $thread->body }}
-                        </div>
+                    <!-- Thread component -->
+                    @include('threads.partials._thread')
+
+                    <!-- Reply components -->
+                    @php $i = 1; @endphp
+
+                    @foreach ($replies as $reply)
+                        @include('threads.partials._reply', ['i' => $i])
+                    @endforeach
+
+                    <div class="text-center">
+                        {{ $replies->links() }}
                     </div>
-                </article>
 
-                <!-- Replies -->
-                @each ('threads.partials._reply', $replies, 'reply')
-
-                <div class="text-center">
-                    {{ $replies->links() }}
                 </div>
-
             </div>
         </div>
     </div>

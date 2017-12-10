@@ -6,24 +6,16 @@
     <div class="row">
 
         <div class="col-md-3">
-            @include('partials.sidebar._button')
+            @auth
+                @include('partials.sidebar._button')
+            @endauth
             @include('partials.sidebar._filters')
             @include('partials.sidebar._categories')
         </div>
 
         <div class="col-md-9">
 
-            <div class="panel panel-default" style="margin-top: 20px">
-                <div class="panel-heading text-uppercase">
-                    Forum Threads
-                </div>
-
-                <div class="panel-body">
-                    <div class="threads">
-                        @each ('threads.partials._thread', $threads, 'thread')
-                    </div>
-                </div>
-            </div>
+            @each ('threads.partials._thread_single', $threads, 'thread')
 
             <div class="text-center">
                 {{ $threads->appends(Request::input())->links() }}

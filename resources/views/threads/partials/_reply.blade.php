@@ -1,29 +1,27 @@
-<div class="thread-reply">
+@component('partials.components.thread')
+    @slot('well_class') component-well-reply
+    @endslot
+    @slot('media_user')
+        <a href="{{ route('threads.index', ['', set_filter('user', $reply->user->name)]) }}">
+            <b>{{ $reply->user->name }}</b>
+        </a>
+    @endslot
+    @slot('media_img') {{ asset('images/avatar.png') }}
+    @endslot
+    @slot('media_title') Re: #{{ $i++ }}
+    @endslot
+    @slot('calendar') <b>Posted:</b> {{ $reply->formatted_created }}
+    @endslot
+    @slot('inclusion')
+        @include('likes.partials._form', [
+        'model' => $reply,
+        'icon' => 'glyphicon-thumbs-up'
+        ])
 
-    <div class="panel panel-default">
-
-        <div class="panel-heading flex align-center">
-
-            <div class="flex-1">
-                <a href="{{ route('threads.index', ['', set_filter('user', $reply->user->name)]) }}">
-                    {{ $reply->user->name }}
-                </a>
-                posted {{ $reply->formatted_created }}
-            </div>
-
-            @include('likes.partials._form', [
-                'model' => $reply,
-                'icon' => 'glyphicon-thumbs-up'
-            ])
-
-            {{ $reply->likes_count }}
-
-        </div>
-
-        <div class="panel-body">
-            {{ $reply->body }}
-        </div>
-
-    </div>
-
-</div>
+        {{ $reply->likes_count }}
+    @endslot
+    @slot('count')
+    @endslot
+    @slot('media_body') {{ $reply->body }}
+    @endslot
+@endcomponent

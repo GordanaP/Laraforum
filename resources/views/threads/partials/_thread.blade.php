@@ -1,26 +1,23 @@
-<article>
-
-    <h4>
-        <a href="{{ route('threads.show', [$thread->category, $thread->slug]) }}">
-            {{ $thread->body }}
-        </a>
-    </h4>
-
-    <p>
-        <span class="text-uppercase">
-            <a href="{{ route('threads.index', $thread->category) }}">
-                {{ $thread->category->name }}
-            </a>
-        </span>
-
-        Started by
+@component('partials.components.thread')
+    @slot('well_class') component-well-thread
+    @endslot
+    @slot('media_user')
         <a href="{{ route('threads.index', ['', set_filter('user', $thread->user->name)]) }}">
-            {{ $thread->user->name }}
+            <b>{{ $thread->user->name }}</b>
         </a>
-        {{ $thread->formatted_created }}
-        <i class="fa fa-comments" aria-hidden="true"></i> {{ $thread->replies_count }} {{ str_plural('reply', $thread->replies_count) }}
-    </p>
-
-</article>
-
-<hr>
+    @endslot
+    @slot('media_img') {{ asset('images/avatar.png') }}
+    @endslot
+    @slot('media_title') {{ $thread->title }}
+    @endslot
+    @slot('calendar') <b>Started:</b> {{ $thread->formatted_created }}
+    @endslot
+    @slot('inclusion')
+    @endslot
+    @slot('count')
+        <i class="fa fa-comments"></i>
+        <b>{{ str_plural('Reply', $thread->replies_count) }}</b>: {{ $thread->replies_count }}
+    @endslot
+    @slot('media_body') {{ $thread->body }}
+    @endslot
+@endcomponent
