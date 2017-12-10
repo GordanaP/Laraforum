@@ -13,8 +13,13 @@ class ThreadController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show']);
+        // Auhtenticate
+        $this->middleware('auth')->only('create', 'store');
+
+        // Authorize
+        $this->authorizeResource(Thread::class);
     }
+
 
     /**
      * Display a listing of the resource.
@@ -122,4 +127,14 @@ class ThreadController extends Controller
 
         return back();
     }
+
+    protected function resourceAbilityMap()
+    {
+         return [
+            'edit'    => 'access',
+            'update'  => 'access',
+            'destroy' => 'access',
+        ];
+    }
+
 }

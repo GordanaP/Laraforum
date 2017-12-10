@@ -26,19 +26,23 @@
                     <a href="{{ route('threads.show', [$thread->category, $thread]) }}" class="flex-1">
                         {{ $thread->title }}
                     </a>
-                    <a href="#" class="btn btn-warning btn-sm btn-thread-edit square">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                    </a>
-                    <form action="{{ route('threads.destroy', $thread) }}" method="POST">
 
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
+                    @can('access', $thread)
+                        <a href="#" class="btn btn-warning btn-sm btn-thread-edit square">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                        <form action="{{ route('threads.destroy', $thread) }}" method="POST">
 
-                        <button class="btn btn-warning btn-sm square">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </button>
-                    </form>
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+
+                            <button class="btn btn-warning btn-sm square">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </form>
+                    @endcan
                 </div>
+
                 <div class="panel-body">
                     <p>
                         <b>Category</b>: <span class="text-uppercase">

@@ -63,4 +63,9 @@ class User extends Authenticatable
         return $this->created_at->diffForHUmans();
     }
 
+    public function owns($related)
+    {
+        return $this->id == $related->user_id;
+    }
+
 }
