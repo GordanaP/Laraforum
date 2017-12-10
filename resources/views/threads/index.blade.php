@@ -13,9 +13,13 @@
             @include('partials.sidebar._categories')
         </div>
 
-        <div class="col-md-9">
+        <div class="col-md-8 col-md-offset-1">
 
-            @each ('threads.partials._thread_single', $threads, 'thread')
+            @if ($threads)
+                @each ('threads.partials._thread_single', $threads, 'thread')
+            @else
+                No results.
+            @endif
 
             <div class="text-center">
                 {{ $threads->appends(Request::input())->links() }}

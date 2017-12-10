@@ -25,14 +25,11 @@
                     <!-- Reply form -->
                     @auth
                         @include('replies.partials._form')
+                    @else
+                        <p><a href="/login">Log in to reply</a></p>
                     @endauth
-                    @guest
 
-                        <a href="/login">Log in to reply</a>
-
-                    @endguest
-
-                    <!-- Thread component -->
+                    <!-- Thread components -->
                     @include('threads.partials._thread')
 
                     <!-- Reply components -->
@@ -42,6 +39,7 @@
                         @include('threads.partials._reply', ['i' => $i])
                     @endforeach
 
+                    <!-- Pagination -->
                     <div class="text-center">
                         {{ $replies->links() }}
                     </div>

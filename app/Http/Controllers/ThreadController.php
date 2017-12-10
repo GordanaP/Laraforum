@@ -23,14 +23,29 @@ class ThreadController extends Controller
      */
     public function index(Category $category = null, ThreadFilters $filters)
     {
-        $threads = Thread::with('category')->latest()->filter($filters);
-
         if($category)
         {
-            $threads = Thread::with('category')->where('category_id', $category->id);
+            $threads = Thread::with('category')
+                ->where('category_id', $category->id)
+                ->latest()
+                ->filter($filters)
+                ->paginate(5);
+
+            if (request()->exists('user'))
+            {
+                return view('profiles.show')->with([
+                    'user' => Auth::user(),
+                    'userThreads' => $threads
+                ]);
+            }
+
+            return view('threads.index', compact('threads'));
         }
 
-        $threads = $threads->paginate(5);
+        $threads = Thread::with('category')
+            ->latest()
+            ->filter($filters)
+            ->paginate(5);
 
         return view('threads.index', compact('threads'));
     }
@@ -103,6 +118,8 @@ class ThreadController extends Controller
      */
     public function destroy(Thread $thread)
     {
-        //
+        $thread->delete();
+
+        return back();
     }
 }

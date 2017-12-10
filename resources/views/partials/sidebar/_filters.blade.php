@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-12">
 
         <h4 class="text-uppercase">Choose by filter</h4>
 
@@ -13,7 +13,7 @@
 
             @auth
             <li class="list-group-item">
-                <a href="{{ route('threads.index', ['', set_filter('user', Auth::user()->name)]) }}">
+                <a href="{{ route('profiles.show', Auth::user()) }}">
                     <i class="fa fa-share-alt" aria-hidden="true"></i> My threads
                 </a>
             </li>

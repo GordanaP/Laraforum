@@ -28,9 +28,19 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
     public function threads()
     {
-        return $this->hasMany(Thread::class);
+        return $this->hasMany(Thread::class)->latest()->with('category');
     }
 
     public function replies()
@@ -46,6 +56,11 @@ class User extends Authenticatable
     public function addThread($thread)
     {
         $this->threads()->save($thread);
+    }
+
+    public function getFormattedCreatedAttribute()
+    {
+        return $this->created_at->diffForHUmans();
     }
 
 }

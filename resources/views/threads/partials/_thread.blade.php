@@ -2,7 +2,7 @@
     @slot('well_class') component-well-thread
     @endslot
     @slot('media_user')
-        <a href="{{ route('threads.index', ['', set_filter('user', $thread->user->name)]) }}">
+        <a href="{{ route('profiles.show', $thread->user) }}">
             <b>{{ $thread->user->name }}</b>
         </a>
     @endslot
