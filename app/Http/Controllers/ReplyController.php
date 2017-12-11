@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Reply;
 use App\Thread;
+use Illuminate\Http\Request;
 use App\Http\Requests\ReplyRequest;
 
 class ReplyController extends Controller
@@ -29,18 +30,6 @@ class ReplyController extends Controller
         return back()->with('flash', 'Your reply has been published.');
     }
 
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Reply  $reply
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Reply $reply)
-    {
-        //
-    }
-
     /**
      * Update the specified resource in storage.
      *
@@ -50,7 +39,13 @@ class ReplyController extends Controller
      */
     public function update(ReplyRequest $request, Reply $reply)
     {
-        //
+        $reply->update([
+            'body' => $request->body
+        ]);
+
+        return response ([
+            'message' => 'Good'
+        ]);
     }
 
     /**
@@ -69,7 +64,6 @@ class ReplyController extends Controller
     protected function resourceAbilityMap()
     {
          return [
-            'edit'    => 'access',
             'update'  => 'access',
             'destroy' => 'access',
         ];

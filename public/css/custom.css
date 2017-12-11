@@ -1,5 +1,7 @@
 .container{width: 90% !important}
 i { margin-right: 8px; }
+[v-cloak] {display: none}
+.has-text-danger { color: red !important }
 
 a.btn-new-thread {width: 100%; background: none; border: 2px solid #2fa4e7; margin: 20px 0;
     text-transform: uppercase; letter-spacing: 1px}

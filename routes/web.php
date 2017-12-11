@@ -20,7 +20,7 @@ Route::resource('/threads', 'ThreadController', [
 
 // Reply
 Route::resource('/replies', 'ReplyController', [
-    'only' => ['edit', 'update', 'destroy']
+    'only' => ['update', 'destroy']
 ]);
 Route::post('threads/{thread}/replies', 'ReplyController@store')->name('replies.store');
 

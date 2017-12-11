@@ -12,7 +12,7 @@
         {{ csrf_field() }}
 
         <div class="form-group">
-            <textarea name="reply_body" id="replyBody" class="form-control" rows="5" placeholder="Have your say here.."></textarea>
+            <textarea name="body" id="body" class="form-control" rows="5" placeholder="Have your say here.."></textarea>
         </div>
 
         <div class="form-group">

@@ -1,52 +1,72 @@
-@component('partials.components.thread')
+<reply :reply="{{ $reply }}" inline-template v-cloak>
 
-    @slot('well_class') component-well-reply
-    @endslot
+    @component('partials.components.thread')
 
-    @slot('media_user')
-        <a href="{{ route('profiles.show', $reply->user) }}">
-            <b>{{ $reply->user->name }}</b>
-        </a>
-    @endslot
+        @slot('well_class') component-well-reply
+        @endslot
 
-    @slot('media_img') {{ asset('images/avatar.png') }}
-    @endslot
-
-    @slot('media_title') Re: #{{ $i++ }}
-    @endslot
-
-    @slot('calendar') <b>Posted:</b> {{ $reply->formatted_created }}
-    @endslot
-
-    @slot('buttons')
-        @can('access', $reply)
-            <a href="#" class="btn btn-warning btn-xs btn-thread-edit square ml-12">
-                <span class="glyphicon glyphicon-pencil"></span>
+        @slot('media_user')
+            <a href="{{ route('profiles.show', $reply->user) }}">
+                <b>{{ $reply->user->name }}</b>
             </a>
-            <form action="{{ route('replies.destroy', $reply) }}" method="POST">
-                {{ csrf_field() }}
-                {{ method_field('DELETE') }}
+        @endslot
 
-                <button type="submit" class="btn btn-danger btn-xs square">
-                    <span class="glyphicon glyphicon-trash"></span>
+        @slot('media_img') {{ asset('images/avatar.png') }}
+        @endslot
+
+        @slot('media_title') Re: #{{ $i++ }}
+        @endslot
+
+        @slot('calendar') <b>Posted:</b> {{ $reply->formatted_created }}
+        @endslot
+
+        @slot('buttons')
+            @can('access', $reply)
+                <button class="btn btn-xs btn-thread-edit square ml-12" style="border: 1px solid #aaa; background: #f9f9f9"
+                    @click="editing = true"
+                >
+                    <span class="glyphicon glyphicon-pencil"></span>
                 </button>
-            </form>
-        @endcan
-    @endslot
+                <form action="{{ route('replies.destroy', $reply) }}" method="POST">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
 
-    @slot('inclusion')
-        @include('likes.partials._form', [
-        'model' => $reply,
-        'icon' => 'glyphicon-thumbs-up'
-        ])
+                    <button type="submit" class="btn btn-danger btn-xs square">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </form>
+            @endcan
+        @endslot
 
-        {{ $reply->likes_count }}
-    @endslot
+        @slot('inclusion')
+            @include('likes.partials._form', [
+            'model' => $reply,
+            'icon' => 'glyphicon-thumbs-up'
+            ])
 
-    @slot('count')
-    @endslot
+            {{ $reply->likes_count }}
+        @endslot
 
-    @slot('media_body') {{ $reply->body }}
-    @endslot
+        @slot('count')
+        @endslot
 
-@endcomponent
+        @slot('media_body')
+            <div v-if="editing">
+                <small v-if="errors.body" class="has-text-danger">
+                    @{{ errors.body[0] }}
+                </small>
+
+                <div class="form-group">
+                    <textarea name="body" id="body" class="form-control" rows="3" v-model="body"></textarea>
+                </div>
+
+                <button class="btn btn-xs square btn-success" @click="update">Update</button>
+                <button class="btn btn-xs square btn-link" @click="editing = false">Cancel</button>
+            </div>
+
+            <div v-else v-text="body"></div>
+        @endslot
+
+    @endcomponent
+
+</reply>

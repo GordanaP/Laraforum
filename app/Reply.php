@@ -33,7 +33,7 @@ class Reply extends Model
     {
         $reply = new static;
 
-        $reply->body = $request->reply_body;
+        $reply->body = $request->body;
         $reply->user()->associate(Auth::id());
 
         return $reply;
