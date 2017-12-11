@@ -47,7 +47,9 @@
                     <p>
                         <b>Category</b>:
                         <span class="text-uppercase">
-                            {{ $thread->category->name }}
+                            <a href="{{ route('profiles.show', [$thread->user, set_filter('category', $thread->category->name)]) }}">
+                                {{ $thread->category->name }}
+                            </a>
                         </span>
                         <b>Started</b>: {{ $thread->formatted_created }}
                         <b>{{ str_plural('Reply', $thread->replies_count) }}</b>: {{ $thread->replies_count }}

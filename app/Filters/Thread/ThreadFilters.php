@@ -2,13 +2,14 @@
 
 namespace App\Filters\Thread;
 
-use App\Filters\Filters;
 use App\User;
+use App\Category;
 use Carbon\Carbon;
+use App\Filters\Filters;
 
 class ThreadFilters extends Filters
 {
-    protected $filters = ['user', 'popular', 'trending'];
+    protected $filters = ['user', 'popular', 'trending', 'category'];
 
     protected function user($name)
     {
@@ -34,6 +35,16 @@ class ThreadFilters extends Filters
         if($bool === '1')
         {
             $this->builder->where('created_at', '>', \Carbon\Carbon::now()->subWeek());
+        }
+    }
+
+    public function category($slug)
+    {
+        $category = Category::whereSlug($slug)->first();
+
+        if ($category)
+        {
+            return $this->builder->where('category_id', $category->id);
         }
     }
 }

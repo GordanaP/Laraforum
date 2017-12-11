@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\Thread\ThreadFilters;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -44,9 +45,9 @@ class ProfileController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $user, ThreadFilters $filters)
     {
-        $userThreads = $user->threads()->paginate(10);
+        $userThreads = $user->threads()->filter($filters)->paginate(10);
 
         return view('profiles.show', compact('user', 'userThreads'));
     }
