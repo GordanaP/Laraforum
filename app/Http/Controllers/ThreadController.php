@@ -126,5 +126,4 @@ class ThreadController extends Controller
             'destroy' => 'access',
         ];
     }
-
 }

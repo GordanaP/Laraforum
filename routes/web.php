@@ -19,9 +19,10 @@ Route::resource('/threads', 'ThreadController', [
 ]);
 
 // Reply
-Route::group(['prefix' => 'threads/{thread}'], function() {
-    Route::resource('/replies', 'ReplyController');
-});
+Route::resource('/replies', 'ReplyController', [
+    'only' => ['edit', 'update', 'destroy']
+]);
+Route::post('threads/{thread}/replies', 'ReplyController@store')->name('replies.store');
 
 // Like
 Route::post('reply/{reply}/likes', 'LikeController@store')->name('likes.store');

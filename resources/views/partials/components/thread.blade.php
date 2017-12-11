@@ -23,8 +23,9 @@
                 </h4>
 
                 <div class="flex align-center calendar-media">
-                    <span class="flex-1">
+                    <span class="flex align-center flex-1">
                         <i class="fa fa-calendar"></i> {{ $calendar }}
+                        {{ $buttons }}
                     </span>
 
                     {{ $inclusion }}

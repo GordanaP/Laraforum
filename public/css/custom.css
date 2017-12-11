@@ -24,4 +24,4 @@ a.btn-new-thread {width: 100%; background: none; border: 2px solid #2fa4e7; marg
 .sidebar-module-inset { padding: 15px; background: #f5f5f5; border-radius: 4px;}
 .sidebar-module-inset p:last-child, .sidebar-module-inset ul:last-child, .sidebar-module-inset ol:last-child { margin-bottom: 0; }
 
-a.btn-thread-edit {background: none; color:inherit; border: 1px solid red;}
+a.btn-thread-edit {background: none; color:inherit; border: 1px solid #9A161A;}

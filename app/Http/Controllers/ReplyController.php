@@ -11,27 +11,9 @@ class ReplyController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
-    }
+        $this->middleware('auth')->only('store');
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Thread $thread)
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Thread $thread)
-    {
-        //
+        $this->authorizeResource(Reply::class);
     }
 
     /**
@@ -47,16 +29,6 @@ class ReplyController extends Controller
         return back()->with('flash', 'Your reply has been published.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Reply  $reply
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Thread $thread, Reply $reply)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -64,7 +36,7 @@ class ReplyController extends Controller
      * @param  \App\Reply  $reply
      * @return \Illuminate\Http\Response
      */
-    public function edit(Thread $thread, Reply $reply)
+    public function edit(Reply $reply)
     {
         //
     }
@@ -76,7 +48,7 @@ class ReplyController extends Controller
      * @param  \App\Reply  $reply
      * @return \Illuminate\Http\Response
      */
-    public function update(ReplyRequest $request, Thread $thread, Reply $reply)
+    public function update(ReplyRequest $request, Reply $reply)
     {
         //
     }
@@ -87,8 +59,19 @@ class ReplyController extends Controller
      * @param  \App\Reply  $reply
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Thread $thread, Reply $reply)
+    public function destroy(Reply $reply)
     {
-        //
+        $reply->delete();
+
+        return back()->with('flash', 'Your reply has been deleted.');
+    }
+
+    protected function resourceAbilityMap()
+    {
+         return [
+            'edit'    => 'access',
+            'update'  => 'access',
+            'destroy' => 'access',
+        ];
     }
 }

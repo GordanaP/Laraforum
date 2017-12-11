@@ -998,9 +998,6 @@ var app = new Vue({
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 
 window._ = __webpack_require__(12);
 
@@ -1013,6 +1010,7 @@ window._ = __webpack_require__(12);
 try {
   window.$ = window.jQuery = __webpack_require__(14);
 
+  window.Vue = __webpack_require__(35);
   __webpack_require__(15);
 } catch (e) {}
 
@@ -1055,8 +1053,8 @@ if (token) {
 //     key: 'your-pusher-key'
 // });
 
-
-window.events = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
+//import Vue from 'vue'
+window.events = new Vue();
 
 window.flash = function (message) {
   window.events.$emit('flash', message);
@@ -43025,7 +43023,7 @@ var render = function() {
     [
       _c(
         "div",
-        { staticClass: "alert alert-danger", attrs: { role: "danger" } },
+        { staticClass: "alert alert-success", attrs: { role: "danger" } },
         [
           _c("strong", [_vm._v("Success!")]),
           _vm._v(" " + _vm._s(_vm.body) + "\n    ")

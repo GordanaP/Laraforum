@@ -10,6 +10,7 @@ window._ = require('lodash');
 try {
     window.$ = window.jQuery = require('jquery');
 
+    window.Vue = require('vue');
     require('bootstrap-sass');
 } catch (e) {}
 
@@ -52,7 +53,7 @@ if (token) {
 //     key: 'your-pusher-key'
 // });
 
-import Vue from 'vue'
+//import Vue from 'vue'
 window.events = new Vue()
 
 window.flash = function (message){

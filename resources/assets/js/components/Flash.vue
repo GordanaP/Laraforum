@@ -1,6 +1,6 @@
 <template>
     <div class="flash-alert" v-show="show">
-        <div class="alert alert-danger" role="danger">
+        <div class="alert alert-success" role="danger">
             <strong>Success!</strong> {{ body }}
         </div>
     </div>
