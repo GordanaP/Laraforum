@@ -67,6 +67,15 @@ class Thread extends Model
         return $thread;
     }
 
+    public function changed($request)
+    {
+        $this->title = $request->title;
+        $this->body = $request->body;
+        $this->category()->associate($request->category);
+
+        return $this;
+    }
+
     public function addReply($reply)
     {
         $this->replies()->save($reply);

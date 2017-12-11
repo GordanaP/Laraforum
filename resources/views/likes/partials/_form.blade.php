@@ -2,10 +2,12 @@
 
     {{ csrf_field() }}
 
-    <button class=" btn btn-link btn-link-likes
-        {{$model->isLikedBy(Auth::user()) ? 'btn-liked disabled' : 'btn-non-liked' }}"
-    >
-        <span class="glyphicon {{ $icon }}"></span>
-    </button>
+    @auth
+        <button class=" btn btn-link btn-link-likes
+            {{$model->isLikedBy(Auth::user()) ? 'btn-liked disabled' : 'btn-non-liked' }}"
+        >
+            <span class="glyphicon {{ $icon }}"></span>
+        </button>
+    @endauth
 
 </form>

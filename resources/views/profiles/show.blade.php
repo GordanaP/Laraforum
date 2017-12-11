@@ -28,7 +28,7 @@
                     </a>
 
                     @can('access', $thread)
-                        <a href="#" class="btn btn-warning btn-sm btn-thread-edit square">
+                        <a href="{{ route('threads.edit', [$thread->category, $thread]) }}" class="btn btn-warning btn-sm btn-thread-edit square">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a>
                         <form action="{{ route('threads.destroy', $thread) }}" method="POST">
@@ -45,11 +45,7 @@
 
                 <div class="panel-body">
                     <p>
-                        <b>Category</b>: <span class="text-uppercase">
-                            <a href="{{ route('threads.index', [$thread->category, set_filter('user', $user->name)]) }}">
-                                {{ $thread->category->name }}
-                            </a>
-                        </span>
+                        <b>Category</b>: <span class="text-uppercase">{{ $thread->category->name }}</span>
                         <b>Started</b>: {{ $thread->formatted_created }}
                         <b>{{ str_plural('Reply', $thread->replies_count) }}</b>: {{ $thread->replies_count }}
                     </p>

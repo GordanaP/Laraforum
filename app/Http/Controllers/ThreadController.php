@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use App\User;
+use App\Reply;
+use App\Thread;
 use App\Category;
 use App\Filters\Thread\ThreadFilters;
 use App\Http\Requests\ThreadRequest;
-use App\Reply;
-use App\Thread;
-use Auth;
 
 class ThreadController extends Controller
 {
@@ -36,15 +37,17 @@ class ThreadController extends Controller
                 ->filter($filters)
                 ->paginate(5);
 
-            if (request()->exists('user'))
-            {
-                return view('profiles.show')->with([
-                    'user' => Auth::user(),
-                    'userThreads' => $threads
-                ]);
-            }
+            // if (request()->exists('user'))
+            // {
+            //     $user = User::whereName('Gordana')->first();
 
-            return view('threads.index', compact('threads'));
+            //     return view('profiles.show')->with([
+            //         'user' => $user,
+            //         'userThreads' => $threads
+            //     ]);
+            // }
+
+            // return view('threads.index', compact('threads'));
         }
 
         $threads = Thread::with('category')
@@ -73,7 +76,7 @@ class ThreadController extends Controller
      */
     public function store(ThreadRequest $request)
     {
-        Auth::user()->addThread(Thread::new($request));
+        Auth::user()->saveThread(Thread::new($request));
 
         return redirect()->route('threads.index');
     }
@@ -86,7 +89,7 @@ class ThreadController extends Controller
      */
     public function show(Category $category, Thread $thread)
     {
-        // load user with every reply to avoid N+1 or Reply::where('thread_id', $thread->id)
+        // load user with .every reply to avoid N+1 or Reply::where('thread_id', $thread->id)
         $replies = $thread->replies()->latest()->paginate(10);
 
         return view('threads.show', compact('thread', 'replies'));
@@ -98,9 +101,9 @@ class ThreadController extends Controller
      * @param  \App\Thread  $thread
      * @return \Illuminate\Http\Response
      */
-    public function edit(Thread $thread)
+    public function edit(Category $category, Thread $thread)
     {
-        //
+        return view('threads.edit', compact('thread', 'category'));
     }
 
     /**
@@ -110,9 +113,11 @@ class ThreadController extends Controller
      * @param  \App\Thread  $thread
      * @return \Illuminate\Http\Response
      */
-    public function update(ThreadRequest $request, Thread $thread)
+    public function update(ThreadRequest $request, Category $category, Thread $thread)
     {
-        //
+        Auth::user()->saveThread($thread->changed($request));
+
+        return redirect()->route('threads.edit', [$thread->category, $thread]);
     }
 
     /**
