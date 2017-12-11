@@ -44,7 +44,7 @@ class ReplyController extends Controller
     {
         $thread->addReply(Reply::new($request));
 
-        return back();
+        return back()->with('flash', 'Your reply has been published.');
     }
 
     /**

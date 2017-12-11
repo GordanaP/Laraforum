@@ -45,7 +45,10 @@
 
                 <div class="panel-body">
                     <p>
-                        <b>Category</b>: <span class="text-uppercase">{{ $thread->category->name }}</span>
+                        <b>Category</b>:
+                        <span class="text-uppercase">
+                            {{ $thread->category->name }}
+                        </span>
                         <b>Started</b>: {{ $thread->formatted_created }}
                         <b>{{ str_plural('Reply', $thread->replies_count) }}</b>: {{ $thread->replies_count }}
                     </p>

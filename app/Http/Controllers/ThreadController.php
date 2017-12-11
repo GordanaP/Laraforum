@@ -29,31 +29,14 @@ class ThreadController extends Controller
      */
     public function index(Category $category = null, ThreadFilters $filters)
     {
+        $threads = Thread::with('category', 'user');
+
         if($category)
         {
-            $threads = Thread::with('category')
-                ->where('category_id', $category->id)
-                ->latest()
-                ->filter($filters)
-                ->paginate(5);
-
-            // if (request()->exists('user'))
-            // {
-            //     $user = User::whereName('Gordana')->first();
-
-            //     return view('profiles.show')->with([
-            //         'user' => $user,
-            //         'userThreads' => $threads
-            //     ]);
-            // }
-
-            // return view('threads.index', compact('threads'));
+            $threads = Thread::with('category', 'user')->where('category_id', $category->id);
         }
 
-        $threads = Thread::with('category')
-            ->latest()
-            ->filter($filters)
-            ->paginate(5);
+        $threads = $threads->latest()->filter($filters)->paginate(5);
 
         return view('threads.index', compact('threads'));
     }
@@ -78,7 +61,8 @@ class ThreadController extends Controller
     {
         Auth::user()->saveThread(Thread::new($request));
 
-        return redirect()->route('threads.index');
+        return redirect()->route('threads.index')
+            ->with('flash', 'Your thread has been published.');
     }
 
     /**
@@ -117,7 +101,8 @@ class ThreadController extends Controller
     {
         Auth::user()->saveThread($thread->changed($request));
 
-        return redirect()->route('threads.edit', [$thread->category, $thread]);
+        return redirect()->route('threads.edit', [$thread->category, $thread])
+            ->with('flash', 'The thread has been updated.');
     }
 
     /**
@@ -130,7 +115,7 @@ class ThreadController extends Controller
     {
         $thread->delete();
 
-        return back();
+        return back()->with('flash', 'The thread has been deleted.');;
     }
 
     protected function resourceAbilityMap()

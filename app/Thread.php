@@ -12,8 +12,6 @@ class Thread extends Model
 
     protected $fillable = ['title', 'body'];
 
-    protected $with = ['user'];
-
     protected static function boot()
     {
         parent::boot();

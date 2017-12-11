@@ -36,7 +36,9 @@
                     @php $i = 1; @endphp
 
                     @foreach ($replies as $reply)
-                        @include('threads.partials._reply', ['i' => $i])
+                        @include('threads.partials._reply', [
+                            'i' => $i++
+                        ])
                     @endforeach
 
                     <!-- Pagination -->
