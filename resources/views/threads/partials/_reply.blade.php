@@ -14,7 +14,7 @@
         @slot('media_img') {{ asset('images/avatar.png') }}
         @endslot
 
-        @slot('media_title') Re: #{{ $i++ }}
+        @slot('media_title') Re: {{ $reply->thread->title }}
         @endslot
 
         @slot('calendar') <b>Posted:</b> {{ $reply->formatted_created }}

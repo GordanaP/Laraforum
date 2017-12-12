@@ -6,6 +6,13 @@ use App\Like;
 
 trait Likeable
 {
+    protected static function bootLikeable()
+    {
+        static::deleting(function($model){
+            $model->likes()->delete();
+        });
+    }
+
     public function likes()
     {
         return $this->morphMany(Like::class, 'likeable');

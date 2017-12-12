@@ -73,8 +73,7 @@ class ThreadController extends Controller
      */
     public function show(Category $category, Thread $thread)
     {
-        // load user with .every reply to avoid N+1 or Reply::where('thread_id', $thread->id)
-        $replies = $thread->replies()->latest()->paginate(10);
+        $replies = $thread->replies()->with('thread')->latest()->paginate(10);
 
         return view('threads.show', compact('thread', 'replies'));
     }
