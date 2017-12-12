@@ -22,11 +22,23 @@
                     console.log(response)
                 }).catch((error) => this.errors = error.response.data.errors)
 
-                if(this.errors = '')
+                if(this.errors = {})
                 {
+                    this.editing = true
+                }
+                else{
                     this.editing = false
                     flash('Reply updated')
                 }
+            },
+            destroy(){
+                axios.delete('/replies/' + this.reply.id).then((response) => {
+                    $(this.$el).fadeOut(300, () => {
+                    flash(response.data.message)
+
+                    })
+                });
+
             }
         }
     }

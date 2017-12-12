@@ -27,14 +27,12 @@
                 >
                     <span class="glyphicon glyphicon-pencil"></span>
                 </button>
-                <form action="{{ route('replies.destroy', $reply) }}" method="POST">
-                    {{ csrf_field() }}
-                    {{ method_field('DELETE') }}
 
-                    <button type="submit" class="btn btn-danger btn-xs square">
-                        <span class="glyphicon glyphicon-trash"></span>
-                    </button>
-                </form>
+                <button class="btn btn-xs btn-danger square"
+                    @click="destroy"
+                >
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
             @endcan
         @endslot
 

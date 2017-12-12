@@ -58,6 +58,12 @@ class ReplyController extends Controller
     {
         $reply->delete();
 
+        if(request()->expectsJson()) {
+            return response([
+                'message' => 'Your reply has been deleted.'
+            ]);
+        }
+
         return back()->with('flash', 'Your reply has been deleted.');
     }
 

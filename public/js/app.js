@@ -43420,10 +43420,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return _this.errors = error.response.data.errors;
             });
 
-            if (this.errors = '') {
+            if (this.errors = {}) {
+                this.editing = true;
+            } else {
                 this.editing = false;
                 flash('Reply updated');
             }
+        },
+        destroy: function destroy() {
+            var _this2 = this;
+
+            axios.delete('/replies/' + this.reply.id).then(function (response) {
+                $(_this2.$el).fadeOut(300, function () {
+                    flash(response.data.message);
+                });
+            });
         }
     }
 });
