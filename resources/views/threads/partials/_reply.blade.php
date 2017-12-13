@@ -37,12 +37,9 @@
         @endslot
 
         @slot('inclusion')
-            @include('likes.partials._form', [
-            'model' => $reply,
-            'icon' => 'glyphicon-thumbs-up'
-            ])
-
-            {{ $reply->likes_count }}
+            @auth
+                <like :reply="{{ $reply }}"></like>
+            @endauth
         @endslot
 
         @slot('count')

@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use Auth;
 use App\Like;
 
 trait Likeable
@@ -18,10 +19,15 @@ trait Likeable
         return $this->morphMany(Like::class, 'likeable');
     }
 
-    public function isLikedBy($user)
+    public function isLiked()
     {
         // property instead of relationship b/c likes are loaded with every reply
-        return (bool) $this->likes->where('user_id', $user->id)->count();
+        return (bool) $this->likes->where('user_id', Auth::id())->count();
+    }
+
+    public function getIsLikedAttribute()
+    {
+        return $this->isLiked();
     }
 
     public function getLikesCountAttribute()
@@ -29,10 +35,10 @@ trait Likeable
         return $this->likes->count() > 0 ? $this->likes->count() : '';
     }
 
-    public function scopeLikedBy($query, $user)
+    public function scopeLiked($query)
     {
-        return $this->whereHas('likes', function($query) use($user) {
-            $query->where('user_id', $user->id);
+        return $this->whereHas('likes', function($query) {
+            $query->where('user_id', Auth::id());
         });
     }
 }

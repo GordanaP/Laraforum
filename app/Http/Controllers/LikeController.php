@@ -40,9 +40,15 @@ class LikeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Reply $reply)
+    public function store(Reply $reply)
     {
-        Like::new($reply);
+        $reply->like(Like::new($reply));
+
+        if(request()->expectsJson()) {
+            return response([
+                'message' => 'The reply has been liked'
+            ]);
+        }
 
         return back();
     }
@@ -87,8 +93,8 @@ class LikeController extends Controller
      * @param  \App\Like  $like
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Like $like)
+    public function destroy(Reply $reply)
     {
-        //
+        $reply->unlike();
     }
 }

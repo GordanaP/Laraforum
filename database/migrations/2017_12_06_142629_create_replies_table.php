@@ -20,7 +20,6 @@ class CreateRepliesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->unsignedInteger('thread_id')->index();
-            $table->foreign('thread_id')->references('id')->on('threads')->onDelete('cascade');
 
             $table->text('body');
 

@@ -25,7 +25,8 @@ Route::resource('/replies', 'ReplyController', [
 Route::post('threads/{thread}/replies', 'ReplyController@store')->name('replies.store');
 
 // Like
-Route::post('reply/{reply}/likes', 'LikeController@store')->name('likes.store');
+Route::post('replies/{reply}/likes', 'LikeController@store')->name('likes.store');
+Route::delete('replies/{reply}/likes', 'LikeController@destroy')->name('likes.destroy');
 
 // Profile
 Route::resource('/profiles', 'ProfileController', [

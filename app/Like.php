@@ -25,7 +25,6 @@ class Like extends Model
 
         $like->user()->associate(Auth::id());
 
-        return $model->likes()->save($like);
+        return $like;
     }
-
 }

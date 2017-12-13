@@ -14,6 +14,8 @@ class Reply extends Model
 
     protected $with = ['user', 'likes'];
 
+    protected $appends = ['likesCount', 'isLiked'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -39,4 +41,13 @@ class Reply extends Model
         return $reply;
     }
 
+    public function like($like)
+    {
+        return $this->likes()->save($like);
+    }
+
+    public function unlike()
+    {
+        return $this->likes()->where('user_id', Auth::id())->delete();
+    }
 }

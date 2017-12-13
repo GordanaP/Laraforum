@@ -5,7 +5,10 @@
 </template>
 
 <script>
+    import Like from './Like.vue'
+
     export default {
+        components : {Like},
         props: ['reply'],
         data () {
             return {
