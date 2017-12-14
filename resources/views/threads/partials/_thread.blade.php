@@ -21,7 +21,12 @@
     @slot('buttons')
     @endslot
 
+
     @slot('inclusion')
+    @endslot
+
+    @slot('subscribe')
+        <subscribe :thread="{{ $thread }}"></subscribe>
     @endslot
 
     @slot('count')

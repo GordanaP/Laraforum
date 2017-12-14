@@ -29,17 +29,11 @@
                         <p><a href="/login">Log in to reply</a></p>
                     @endauth
 
-                    <!-- Thread components -->
+                    <!-- Thread component -->
                     @include('threads.partials._thread')
 
                     <!-- Reply components -->
-                    @php $i = 1; @endphp
-
-                    @foreach ($replies as $reply)
-                        @include('threads.partials._reply', [
-                            'i' => $i++
-                        ])
-                    @endforeach
+                    @each ('threads.partials._reply', $replies, 'reply')
 
                     <!-- Pagination -->
                     <div class="text-center">

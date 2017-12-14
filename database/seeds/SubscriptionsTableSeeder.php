@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class LikesTableSeeder extends Seeder
+class SubscriptionsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class LikesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Like::class, 10)->create();
+        factory(App\Subscription::class, 10)->create();
     }
 }

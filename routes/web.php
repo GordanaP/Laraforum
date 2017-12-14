@@ -8,6 +8,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
 // Thread
 Route::get('/threads/create', 'ThreadController@create')->name('threads.create');
 Route::get('/threads/{category?}', 'ThreadController@index')->name('threads.index');
@@ -18,11 +19,16 @@ Route::resource('/threads', 'ThreadController', [
     'except' => ['index', 'create', 'show', 'edit', 'update']
 ]);
 
+// Subscription
+Route::post('subscriptions/{thread}/{user?}', 'SubscriptionController@store')->name('subscriptions.store');
+Route::delete('subscriptions/{thread}/{user?}', 'SubscriptionController@destroy')->name('subscriptions.destroy');
+
 // Reply
 Route::resource('/replies', 'ReplyController', [
     'only' => ['update', 'destroy']
 ]);
 Route::post('threads/{thread}/replies', 'ReplyController@store')->name('replies.store');
+
 
 // Like
 Route::post('replies/{reply}/likes', 'LikeController@store')->name('likes.store');

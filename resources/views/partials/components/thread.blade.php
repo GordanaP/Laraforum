@@ -31,9 +31,12 @@
                     {{ $inclusion }}
                 </div>
 
-                <p class="count-media">
-                    {{ $count }}
-                </p>
+                <div class="count-media flex align-center">
+                    <div class="flex-1">
+                        {{ $count }}
+                    </div>
+                    {{ $subscribe }}
+                </div>
 
                 <hr>
 

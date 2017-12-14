@@ -36,6 +36,9 @@
             @endcan
         @endslot
 
+        @slot('subscribe')
+        @endslot
+
         @slot('inclusion')
             @auth
                 <like :reply="{{ $reply }}"></like>
