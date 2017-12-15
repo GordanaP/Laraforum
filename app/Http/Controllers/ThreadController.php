@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use App\User;
-use App\Reply;
-use App\Thread;
-use App\Category;
+use App\{Category, User, Reply, Thread};
 use App\Filters\Thread\ThreadFilters;
 use App\Http\Requests\ThreadRequest;
 

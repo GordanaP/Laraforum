@@ -1,3 +1,4 @@
+body { font-family: 'Source Sans Pro', sans-serif; }
 .container{width: 90% !important}
 i { margin-right: 8px; }
 [v-cloak] {display: none}
@@ -11,11 +12,11 @@ a.btn-new-thread {width: 100%; background: none; border: 2px solid #2fa4e7; marg
 .btn-non-liked:hover{color: red !important}
 .btn-liked{color: red !important}
 
-.panel-thread-replies {margin-top: 20px;  border-width: 2px !important}
-.panel-thread-replies .panel-body {background: #f9f9f9;  padding:18px;}
+.panel-thread-replies {margin-top: 20px;  border-width: 2px !important; }
+.panel-thread-replies .panel-body {background: #fff;  padding:18px;}
 .component-well{padding: 18px !important; border: none !important}
-.component-well-thread {background: #e6e6e6 !important; margin-bottom: 12px !important;}
-.component-well-reply {background: #f1f1f1 !important; margin: 12px 0 !important}
+.component-well-thread {background: #e0e5eb !important; margin-bottom: 12px !important;}
+.component-well-reply {background: #f0f2f5 !important; margin: 12px 0 !important}
 .component-well-panel .panel-body {background: #f9f9f9; padding: 12px;}
 .component-well-panel .panel-body p {margin-bottom: 6px;}
 .component-well-media .calendar-media {margin-top: 12px;}

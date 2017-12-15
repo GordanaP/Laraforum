@@ -12,6 +12,6 @@
 <link href="{{ asset('css/classes.css') }}" rel="stylesheet">
 <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cerulean/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/plain/bootstrap.min.css" rel="stylesheet">
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">

@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use App\Reply;
-use App\Thread;
-use Illuminate\Http\Request;
+use App\{User, Reply, Thread};
 use App\Http\Requests\ReplyRequest;
 
 class ReplyController extends Controller
@@ -25,7 +23,11 @@ class ReplyController extends Controller
      */
     public function store(ReplyRequest $request, Thread $thread)
     {
-        $thread->addReply(Reply::new($request));
+        // Add a reply
+        $reply = $thread->addReply(Reply::new($request));
+
+        // Notify subscribers
+        $thread->notifySubscribersAbout($reply);
 
         return back()->with('flash', 'Your reply has been published.');
     }
@@ -43,9 +45,13 @@ class ReplyController extends Controller
             'body' => $request->body
         ]);
 
-        return response ([
-            'message' => 'Good'
-        ]);
+        if (request()->expectsJson()) {
+            return response ([
+                'message' => 'Good'
+            ]);
+        }
+
+        return back()->with('flash', 'Your reply has been updated.');
     }
 
     /**

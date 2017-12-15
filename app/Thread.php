@@ -3,15 +3,15 @@
 namespace App;
 
 use Auth;
+use App\Traits\{Likeable, Subscribable};
 use App\Observers\ThreadObserver;
-use App\Traits\Likeable;
 use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
 {
-    use Likeable;
+    use Likeable, Subscribable;
 
-    protected $fillable = ['title', 'body'];
+    //protected $fillable = ['title', 'body'];
 
     protected $appends = ['isSubscribed'];
 
@@ -46,12 +46,6 @@ class Thread extends Model
         return $this->belongsTo(Category::class);
     }
 
-
-    public function subscriptions()
-    {
-        return $this->hasMany(Subscription::class);
-    }
-
     public function scopeFilter($query, $filters)
     {
         return $filters->apply($query);
@@ -84,27 +78,6 @@ class Thread extends Model
 
     public function addReply($reply)
     {
-        $this->replies()->save($reply);
+        return $this->replies()->save($reply);
     }
-
-    public function subscribe($subscription)
-    {
-        $this->subscriptions()->save($subscription);
-    }
-
-    public function unsubscribe($user = null)
-    {
-        $this->subscriptions()->where('user_id', $user->id ?: Auth::id())->delete();
-    }
-
-    public function isSubscribedBy($user = null)
-    {
-        return (bool) $this->subscriptions->where('user_id', $user->id ?: Auth::id())->count();
-    }
-
-    public function getisSubscribedAttribute()
-    {
-        return (bool) $this->subscriptions->where('user_id', Auth::id())->count();
-    }
-
 }

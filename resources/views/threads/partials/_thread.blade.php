@@ -26,7 +26,7 @@
     @endslot
 
     @slot('subscribe')
-        <subscribe :thread="{{ $thread }}"></subscribe>
+        <subscribe :thread="{{ $thread->load('subscriptions') }}"></subscribe>
     @endslot
 
     @slot('count')

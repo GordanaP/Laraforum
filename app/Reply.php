@@ -10,7 +10,7 @@ class Reply extends Model
 {
     use Likeable;
 
-    protected $fillable = ['body'];
+    //protected $fillable = ['body'];
 
     protected $with = ['user', 'likes'];
 
@@ -39,15 +39,5 @@ class Reply extends Model
         $reply->user()->associate(Auth::id());
 
         return $reply;
-    }
-
-    public function like($like)
-    {
-        return $this->likes()->save($like);
-    }
-
-    public function unlike()
-    {
-        return $this->likes()->where('user_id', Auth::id())->delete();
     }
 }

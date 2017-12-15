@@ -21,7 +21,6 @@ trait Likeable
 
     public function isLiked()
     {
-        // property instead of relationship b/c likes are loaded with every reply
         return (bool) $this->likes->where('user_id', Auth::id())->count();
     }
 
@@ -41,4 +40,5 @@ trait Likeable
             $query->where('user_id', Auth::id());
         });
     }
+
 }
