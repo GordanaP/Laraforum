@@ -2,9 +2,10 @@
 
 namespace App;
 
-use Auth;
-use Illuminate\Database\Eloquent\Model;
 use App\Notifications\ThreadWasUpdated;
+use Auth;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 
 class Subscription extends Model
 {
@@ -29,6 +30,8 @@ class Subscription extends Model
 
     public function notify($reply)
     {
-        $this->user->notify(new ThreadWasUpdated($this->thread, $reply));
+        $time = Carbon::now()->addSeconds(10);
+
+        $this->user->notify((new ThreadWasUpdated($this->thread, $reply))->delay($time));
     }
 }
