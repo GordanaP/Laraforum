@@ -10,7 +10,7 @@ class Reply extends Model
 {
     use Likeable;
 
-    //protected $fillable = ['body'];
+    protected $fillable = ['body'];
 
     protected $with = ['user', 'likes'];
 

@@ -43397,6 +43397,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
+    computed: {
+        hasErrors: function hasErrors() {
+            return Object.keys(this.errors).length > 0;
+        }
+    },
     methods: {
         update: function update() {
             var _this = this;
@@ -43404,17 +43409,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.patch('/replies/' + this.reply.id, {
                 body: this.body
             }).then(function (response) {
-                console.log(response);
+                _this.editing = false;
+                flash('Reply updated');
             }).catch(function (error) {
                 return _this.errors = error.response.data.errors;
             });
 
-            if (this.errors = {}) {
+            if (this.hasErrors()) {
                 this.editing = true;
-            } else {
-                this.editing = false;
-                flash('Reply updated');
             }
+        },
+        cancel: function cancel() {
+            this.clearErrors();
+            this.body = this.reply.body;
+            this.editing = false;
+        },
+        clearErrors: function clearErrors() {
+            this.errors = {};
         },
         destroy: function destroy() {
             var _this2 = this;

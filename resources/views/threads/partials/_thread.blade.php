@@ -1,8 +1,5 @@
 @component('partials.components.thread')
 
-    @slot('well_class') component-well-thread
-    @endslot
-
     @slot('media_user')
         <a href="{{ route('profiles.show', $thread->user) }}">
             <b>{{ $thread->user->name }}</b>
@@ -12,15 +9,14 @@
     @slot('media_img') {{ asset('images/avatar.png') }}
     @endslot
 
-    @slot('media_title') {{ $thread->title }}
+    @slot('media_title') <i class="fa fa-thumb-tack"></i> {{ $thread->title }}
     @endslot
 
-    @slot('calendar') <b>Started:</b> {{ $thread->formatted_created }}
+    @slot('calendar') <b>Started:</b>&nbsp; {{ $thread->formatted_created }}
     @endslot
 
     @slot('buttons')
     @endslot
-
 
     @slot('inclusion')
     @endslot
@@ -31,7 +27,7 @@
 
     @slot('count')
         <i class="fa fa-comments"></i>
-        <b>{{ str_plural('Reply', $thread->replies_count) }}</b>: {{ $thread->replies_count }}
+        <b>{{ str_plural('Reply', $thread->replies_count) }}</b>:&nbsp; {{ $thread->replies_count }}
     @endslot
 
     @slot('media_body') {{ $thread->body }}
