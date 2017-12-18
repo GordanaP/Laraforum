@@ -6,7 +6,7 @@
         </a>
     @endslot
 
-    @slot('media_img') {{ asset('images/avatar.png') }}
+    @slot('media_img') {{ asset('storage/'.$thread->user->profile->avatar()) }}
     @endslot
 
     @slot('media_title') <i class="fa fa-thumb-tack"></i> {{ $thread->title }}

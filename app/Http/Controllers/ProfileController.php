@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only('create', 'store', 'show');
+
+        // Authorize
+        $this->authorizeResource(User::class);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -47,7 +56,7 @@ class ProfileController extends Controller
      */
     public function show(User $user, ThreadFilters $filters)
     {
-        $userThreads = $user->threads()->filter($filters)->paginate(10);
+        $userThreads = $user->threads()->filter($filters)->paginate(3);
 
         return view('profiles.show', compact('user', 'userThreads'));
     }
@@ -85,4 +94,14 @@ class ProfileController extends Controller
     {
         //
     }
+
+    protected function resourceAbilityMap()
+    {
+         return [
+            'edit'    => 'access',
+            'update'  => 'access',
+            'destroy' => 'access',
+        ];
+    }
+
 }

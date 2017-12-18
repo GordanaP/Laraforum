@@ -15,12 +15,14 @@
 
         <div class="col-md-8 col-md-offset-1">
 
+            <!-- Threads list -->
             @if ($threads)
                 @each ('threads.partials._thread_single', $threads, 'thread')
             @else
-                No results.
+                No results at present.
             @endif
 
+            <!-- Pagination -->
             <div class="text-center">
                 {{ $threads->appends(Request::input())->links() }}
             </div>

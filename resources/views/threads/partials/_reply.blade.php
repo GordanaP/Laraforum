@@ -8,7 +8,7 @@
             </a>
         @endslot
 
-        @slot('media_img') {{ asset('images/avatar.png') }}
+        @slot('media_img') {{ asset('storage/'.$reply->user->profile->avatar()) }}
         @endslot
 
         @slot('media_title') Re: {{ $reply->thread->title }}

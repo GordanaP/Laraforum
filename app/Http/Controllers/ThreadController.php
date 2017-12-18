@@ -70,7 +70,7 @@ class ThreadController extends Controller
      */
     public function show(Category $category, Thread $thread)
     {
-        $replies = $thread->replies()->with('thread')->latest()->paginate(10);
+        $replies = $thread->replies()->with('thread')->latest()->paginate(3);
 
         return view('threads.show', compact('thread', 'replies'));
     }

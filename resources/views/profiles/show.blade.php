@@ -4,11 +4,33 @@
 
 @section('content')
 
-    <h1 class="page-header">
-        {{ $user->name }}
-        <small>Member since {{ $user->formatted_created }}</small>
-    </h1>
+<div class="row flex page-header">
+    <!-- Avatar -->
+    <div class="col-md-3">
+        @can('access', $user)
+            <form action="{{ route('avatars.store', $user) }}" method="POST" enctype="multipart/form-data">
 
+                {{ csrf_field() }}
+
+                <input type="file" name="avatar" id="avatar">
+                <button type="submit" class="btn btn-default btn-sm">Upload Avatar</button>
+
+            </form>
+        @endcan
+
+        <img src="{{ asset('storage/'.$user->profile->avatar()) }}" alt="" width="100px" height="100px">
+    </div>
+
+    <!-- Title -->
+    <div class="col-md-9">
+        <h1>
+            {{ $user->name }}
+            <small>Member since {{ $user->formatted_created }}</small>
+        </h1>
+    </div>
+</div>
+
+<div class="row">
     <div class="col-md-3 blog-sidebar">
         <div class="sidebar-module sidebar-module-inset text-center">
             <h4>About</h4>
@@ -60,9 +82,10 @@
         @endforeach
 
         <div class="text-center">
-            {{ $userThreads->links() }}
+            {{ $userThreads->appends(Request::input())->links() }}
         </div>
     </div>
+</div>
 
 
 @endsection

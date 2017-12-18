@@ -38,14 +38,14 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="{{ route('profiles.show', Auth::user()) }}">
-                                    My profile
+                                    <i class="fa fa-user"></i> My profile
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
-                                    Logout
+                                    <i class="fa fa-sign-out"></i> Logout
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

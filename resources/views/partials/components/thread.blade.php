@@ -3,18 +3,17 @@
         <div class="row">
 
             <div class="col-md-2">
-                <div class="panel panel-default component-well-panel">
+                <div class="panel panel-default component-well-panel"  style="margin-bottom: 0;">
                     <div class="panel-body">
-                        <p class="text-center">
-                            {{ $media_user }}
-                        </p>
-
                         <a href="#">
                             <img class="media-object image" src="{{ $media_img }}" alt="no-image-avatar">
                         </a>
                     </div>
                 </div>
 
+                <div class="text-center">
+                    {{ $media_user }}
+                </div>
             </div>
 
             <div class="col-md-10">
@@ -35,7 +34,6 @@
 
                         {{ $inclusion }}
                     </div>
-
 
                     <hr>
 

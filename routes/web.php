@@ -39,6 +39,12 @@ Route::resource('/profiles', 'ProfileController', [
     'parameters' => ['profiles' => 'user'],
 ]);
 
+// Avatar
+Route::post('/profiles/{user}/avatar', 'AvatarController@store')->name('avatars.store');
+Route::get('/profiles/{user}/avatar', 'AvatarController@show')->name('avatars.show');
+Route::delete('/profiles/{user}/avatar', 'AvatarController@destroy')->name('avatars.destroy');
+
+
 // Redirects all non-existing routes to index route
 Route::any('{query}',
   function() { return redirect('/'); })
