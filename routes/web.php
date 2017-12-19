@@ -8,7 +8,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
 // Thread
 Route::get('/threads/create', 'ThreadController@create')->name('threads.create');
 Route::get('/threads/{category?}', 'ThreadController@index')->name('threads.index');
@@ -41,7 +40,6 @@ Route::resource('/profiles', 'ProfileController', [
 
 // Avatar
 Route::post('/profiles/{user}/avatar', 'AvatarController@store')->name('avatars.store');
-Route::get('/profiles/{user}/avatar', 'AvatarController@show')->name('avatars.show');
 Route::delete('/profiles/{user}/avatar', 'AvatarController@destroy')->name('avatars.destroy');
 
 

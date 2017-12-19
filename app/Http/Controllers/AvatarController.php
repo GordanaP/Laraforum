@@ -2,24 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AvatarRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class AvatarController extends Controller
 {
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        //
-    }
-
-
     /**
      * Update the specified resource in storage.
      *
@@ -29,13 +18,27 @@ class AvatarController extends Controller
      */
     public function store(Request $request, User $user)
     {
+        $this->authorize('access', $user);
+
+        if($user->profile->avatar_path)
+        {
+            unlink('storage/'.$user->profile->avatar_path);
+        }
+
         $filename = $request->avatar->getClientOriginalName();
 
         $user->profile->update([
             'avatar_path' => $request->avatar->storeAs('avatars', $filename, 'public')
         ]);
 
-        return back()->with('flash', 'Your avatar has been updated.');
+        if ($request->expectsJson()) {
+            return response ([], 204);
+        }
+
+        return back()->with([
+            'message' => 'Your avatar has been updated.',
+            'type' => 'danger'
+        ]);
     }
 
     /**

@@ -25,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'email', 'created_at', 'updated_at'
+        'password', 'remember_token', 'email', 'created_at', 'updated_at', 'id'
     ];
 
     public function getRouteKeyName()
@@ -72,5 +72,4 @@ class User extends Authenticatable
     {
         return $this->id == $related->user_id;
     }
-
 }

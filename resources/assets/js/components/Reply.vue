@@ -28,10 +28,15 @@
                     body : this.body
                 }).then((response) => {
                     this.editing = false
-                    flash('Reply updated')
+                    $.notify({
+                        title: "Success:",
+                        message: "Your reply has been updated"
+                    }, {
+                        type: 'success'
+                    });
                 }).catch((error) => this.errors = error.response.data.errors)
 
-                if(this.hasErrors())
+                if(this.hasErrors)
                 {
                     this.editing = true
                 }
@@ -47,11 +52,14 @@
             destroy () {
                 axios.delete('/replies/' + this.reply.id).then((response) => {
                     $(this.$el).fadeOut(300, () => {
-                    flash(response.data.message)
-
+                        $.notify({
+                            title: "Success:",
+                            message: response.data.message
+                        }, {
+                            type: 'success'
+                        });
                     })
                 });
-
             }
         }
     }
